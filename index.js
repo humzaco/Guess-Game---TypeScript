@@ -14,7 +14,7 @@ async function askQusestion() {
             {
                 type: "number",
                 name: "user_num",
-                message: chalk.rgb(96, 35, 16)("Select any number between 1 - 10: "),
+                message: chalk.rgb(195, 80, 44)("Select any number between 1 - 10: "),
             },
         ]);
         if (que.user_num === randomNum) {
@@ -36,17 +36,15 @@ async function stratAgain() {
         console.clear();
         playerLife = 4;
         await askQusestion();
-        var restart = await inquirer.prompt([
+        var restart = await inquirer
+            .prompt([
             {
                 type: "input",
                 name: "start_again",
-                message: chalk.rgb(233, 58, 4)("Do you want to restart the game? Press Y or N: "),
-            },
+                message: "Do you want to restart the game? Press Y or N: ",
+            }
         ]);
-    } while (restart.start_again === "y" ||
-        restart.start_again === "Y" ||
-        restart.start_again === "yes" ||
-        restart.start_again === "YES");
+    } while (restart.start_again === "y" || restart.start_again === "Y" || restart.start_again === "yes" || restart.start_again === "YES");
 }
 setTimeout(() => {
     stratAgain();
