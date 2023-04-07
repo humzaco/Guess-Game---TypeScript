@@ -12,8 +12,8 @@ let score = 0;
 async function con() {
   console.log(chalk.green(`Congratulation!! Your guess the right number`));
   score += 10;
-  console.log(chalk.yellow(`Your score is ${score}`));
-  playerLife = 3;
+  console.log(chalk.yellow(`Your score is ${score}.`));
+  playerLife = 4;
   await askQusestion();
 }
 
@@ -34,16 +34,18 @@ async function askQusestion() {
       con();
     } else if (que.user_num < randomNum) {
       console.log(
-        chalk.red(`Your number ${que.user_num} is less than guess number.`)
+        chalk.red(`Your number ${que.user_num} is less than guess number ${randomNum}.`)
       );
+      console.log(chalk.yellow(`Your score is ${score}.`));
     } else if (que.user_num > randomNum) {
       console.log(
-        chalk.red(`Your number ${que.user_num} is greater than guess number.`)
+        chalk.red(`Your number ${que.user_num} is greater than guess number ${randomNum}.`)
       );
+      console.log(chalk.yellow(`Your score is ${score}.`));
     }
-  } while (playerLife > 0 && randomNum !== que.user_num);
-  if (playerLife == 0) {
-    console.log(chalk.yellowBright(`Total Score ${score}`));
+  } while (playerLife > 1 && randomNum !== que.user_num);
+  if (playerLife == 1) {
+    console.log(chalk.grey(`Total Score ${score}.`));
     console.log(chalk.redBright(`GAME OVER!!`));
   }
 }
