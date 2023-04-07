@@ -65,6 +65,7 @@ async function startAgaian() {
         restart.start_again === "Y" ||
         restart.start_again === "yes" ||
         restart.start_again === "YES") {
+        playerLife = 4;
         gameStart();
     }
 }
