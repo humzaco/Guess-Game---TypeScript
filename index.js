@@ -1,3 +1,4 @@
+// Copy by hamza
 import inquirer from "inquirer";
 import chalk from "chalk";
 import showBanner from "node-banner";
@@ -37,21 +38,33 @@ async function askQusestion() {
             console.log(chalk.yellow(`Your score is ${score}.`));
         }
     } while (playerLife > 1 && randomNum !== que.user_num);
+    gameOver();
+}
+async function gameOver() {
     if (playerLife == 1) {
         console.log(chalk.grey(`Total Score ${score}.`));
         console.log(chalk.redBright(`GAME OVER!!`));
+        startAgaian();
     }
 }
-setTimeout(() => {
-    askQusestion();
-}, 1000);
-// await  stratAgain();
-// var restart =  await inquirer
-//     .prompt([
-//         {
-//             type: "input",
-//             name: "start_again",
-//             message: chalk.grey("Do you want to restart the game? Press Y or N: "),
-//         }
-//     ])
-//     restart.start_again === "y" || restart.start_again === "Y" || restart.start_again === "yes" || restart.start_again === "YES"
+async function gameStart() {
+    setTimeout(() => {
+        askQusestion();
+    }, 1000);
+}
+gameStart();
+async function startAgaian() {
+    var restart = await inquirer.prompt([
+        {
+            type: "input",
+            name: "start_again",
+            message: chalk.grey("Do you want to restart the game? Press Y or N: "),
+        },
+    ]);
+    if (restart.start_again === "y" ||
+        restart.start_again === "Y" ||
+        restart.start_again === "yes" ||
+        restart.start_again === "YES") {
+        gameStart();
+    }
+}
