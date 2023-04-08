@@ -7,15 +7,17 @@ import showBanner from "node-banner";
 })();
 let playerLife = 4;
 let score = 0;
+let highSco = 50;
 async function con() {
     console.log(chalk.green(`Congratulation!! Your guess the right number`));
     score += 10;
     console.log(chalk.yellow(`Your score is ${score}.`));
+    high_score();
     playerLife = 4;
     await askQusestion();
 }
 async function askQusestion() {
-    let randomNum = Math.ceil(Math.random() * 4 + 1);
+    let randomNum = Math.floor(Math.random() * 4 + 1);
     do {
         playerLife--;
         console.log(chalk.rgb(251, 151, 63)(`Player life left ${playerLife}`));
@@ -58,7 +60,7 @@ async function startAgaian() {
         {
             type: "input",
             name: "start_again",
-            message: chalk.grey("Do you want to restart the game? Press Y or N: "),
+            message: chalk.grey("Do you want play more? Press Y or N: "),
         },
     ]);
     if (restart.start_again === "y" ||
@@ -66,6 +68,14 @@ async function startAgaian() {
         restart.start_again === "yes" ||
         restart.start_again === "YES") {
         playerLife = 4;
+        console.log(chalk.rgb(164, 39, 163)(`High Score ${highSco}.`));
+        score = 0;
         gameStart();
+    }
+}
+async function high_score() {
+    if (highSco < score) {
+        console.log(chalk.rgb(164, 39, 163)(`Congratulation!! It's new recorde`));
+        highSco = score;
     }
 }
