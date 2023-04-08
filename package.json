@@ -13,6 +13,7 @@
   "dependencies": {
     "chalk": "^5.2.0",
     "chalk-animation": "^2.0.3",
+    "crypto-js": "^4.1.1",
     "inquirer": "^9.1.5",
     "node-banner": "^1.4.0"
   },

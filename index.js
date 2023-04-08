@@ -8,16 +8,24 @@ import showBanner from "node-banner";
 let playerLife = 4;
 let score = 0;
 let highSco = 50;
+let newScoreMassage = [
+    "Congratulations! You've set a new record! Keep soaring to new heights!",
+    "Woohoo! You've smashed the previous record! Your achievements know no bounds!",
+    "Amazing! You've achieved a new record! Your dedication and hard work are truly commendable!",
+    "Bravo! A new record! Your unwavering determination and excellence have paid off!",
+    "Impressive! You've raised the bar and set a new record! Your passion and commitment are truly exceptional!",
+];
+// --------  Continue Function  -------------
 async function con() {
     console.log(chalk.green(`Congratulation!! Your guess the right number`));
     score += 10;
     console.log(chalk.yellow(`Your score is ${score}.`));
-    high_score();
     playerLife = 4;
     await askQusestion();
 }
+// --------  Main Game prompt Function  -------------
 async function askQusestion() {
-    let randomNum = Math.floor(Math.random() * 4 + 1);
+    let randomNum = Math.floor(Math.random() * 6 + 1);
     do {
         playerLife--;
         console.log(chalk.rgb(251, 151, 63)(`Player life left ${playerLife}`));
@@ -25,27 +33,30 @@ async function askQusestion() {
             {
                 type: "number",
                 name: "user_num",
-                message: chalk.rgb(195, 80, 44)("Select any number between 1 - 5: "),
+                message: chalk.rgb(195, 80, 44)("Select any number between 1 - 6: "),
             },
         ]);
         if (que.user_num === randomNum) {
             con();
         }
         else if (que.user_num < randomNum) {
-            console.log(chalk.red(`Your number ${que.user_num} is less than guess number ${randomNum}.`));
+            console.log(chalk.red(`Your number ${que.user_num} is less than guess number.`));
             console.log(chalk.yellow(`Your score is ${score}.`));
         }
         else if (que.user_num > randomNum) {
-            console.log(chalk.red(`Your number ${que.user_num} is greater than guess number ${randomNum}.`));
+            console.log(chalk.red(`Your number ${que.user_num} is greater than guess number.`));
             console.log(chalk.yellow(`Your score is ${score}.`));
         }
     } while (playerLife > 1 && randomNum !== que.user_num);
     gameOver();
 }
+// --------  Game Over - Total score - Powerde BY  -------------
 async function gameOver() {
     if (playerLife == 1) {
-        console.log(chalk.grey(`Total Score ${score}.`));
+        console.log(chalk.rgb(78, 86, 169)(`Total Score ${score}.`));
+        high_score();
         console.log(chalk.redBright(`GAME OVER!!`));
+        console.log(chalk.rgb(30, 215, 174)(`Powered By - Hamza`));
         startAgaian();
     }
 }
@@ -55,6 +66,7 @@ async function gameStart() {
     }, 1000);
 }
 gameStart();
+// --------  Start Again and Again Funtion  -------------
 async function startAgaian() {
     var restart = await inquirer.prompt([
         {
@@ -73,9 +85,11 @@ async function startAgaian() {
         gameStart();
     }
 }
+// --------  Hight Score Function  -------------
 async function high_score() {
     if (highSco < score) {
-        console.log(chalk.rgb(164, 39, 163)(`Congratulation!! It's new recorde`));
+        let randomNum2 = Math.floor(Math.random() * 4 + 1);
+        console.log(chalk.rgb(164, 39, 163)(newScoreMassage[randomNum2]));
         highSco = score;
     }
 }
